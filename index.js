@@ -105,6 +105,7 @@ async function renderStopInfo (card, busStopId) {
 
 async function renderArrivals (card, busStopId) {
   const arrivals = await getArrivals(busStopId)
+  arrivals.sort((a, b) => a.timeToStation - b.timeToStation)
 
   if (arrivals.length === 0) {
     const noArrivalsTemplate = document.querySelector('#noArrivalsTemplate')
