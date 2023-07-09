@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <title>Bus arrivals</title>
+  </head>
+  <body>
+    <dialog id="newBusStopDialog">
+      <div style="display: flex; align-items: center;">
+        <h1 class="h5">Add bus stop</h1>
+        <form method="dialog" style="margin-left: auto">
+          <button
+            class="btn-close" aria-label="Close"
+            style="margin-bottom: 0.5rem;">
+          </button>
+        </form>
+      </div>
+      <form method="dialog">
+        <div class="form-floating mb-3">
+        <input
+          id="newBusStopId" autofocus class="form-control">
+        </input>
+        <label for="newBusStopId">NaPTAN ID</label>
+        </div>
+        <button
+          id="addNewBusStopButton" formmethod="dialog"
+          class="btn btn-primary" style="float: right;"
+        >
+          Add
+        </button>
+      </form>
+    </dialog>
+
+    <div class="container-md">
+      <div id="cards"></div>
+      <div class="d-grid gap-2">
+        <button id="newBusStopButton" class="btn btn-primary mx-1">+</button>
+      </div>
+    </div>
+
+    <template id="cardTemplate">
+      <div class="card">
+        <div class="card-body">
+          <div style="display: flex; align-items: center;">
+            <h2 id="stationName"  class="h3 card-title"></h2>
+            <form onsubmit="return false;" style="margin-left: auto">
+              <button
+                id="removeCardButton"
+                class="btn-close" aria-label="Close"
+                style="margin-bottom: 0.5rem;">
+              </button>
+            </form>
+          </div>
+          <div class="fs-5 mb-3">
+            <span id="platformName" class="badge rounded-pill text-bg-danger"></span>
+            towards <span id="towards"></span>
+          </div>
+          <table class="table">
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </template>
+
+    <template id="tableRowTemplate">
+      <tr>
+        <td class="table-danger"></td>
+        <td></td>
+        <td><span></span> minutes</td>
+      </tr>
+    </template>
+
+    <template id="noDataTemplate">
+      <div class="alert alert-danger" role="alert">
+        No data found.
+      </div>
+    </template>
+
+    <template id="noArrivalsTemplate">
+      <div class="alert alert-secondary" role="alert">
+        No arrivals to show.
+      </div>
+    </template>
+
+    <script src="index.js"></script>
+  </body>
+</html>
