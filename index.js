@@ -48,17 +48,23 @@ async function getBusStopInfo (busStopId) {
 
   const data = await resp.json()
 
-  const commonName = data.commonName
-  const stopLetter = data.stopLetter
-
-  let towards = null
-  for (const addProp of data.additionalProperties) {
-    if (addProp.key === 'Towards') {
-      towards = addProp.value
+  for (const child of data.children) {
+    if (child.naptanId !== busStopId) {
+      continue
     }
-  }
 
-  return { commonName, stopLetter, towards }
+    const commonName = child.commonName
+    const stopLetter = child.stopLetter
+
+    let towards = null
+    for (const addProp of child.additionalProperties) {
+      if (addProp.key === 'Towards') {
+        towards = addProp.value
+      }
+    }
+
+    return { commonName, stopLetter, towards }
+  }
 }
 
 async function getArrivals (busStopId) {
